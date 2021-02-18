@@ -12,7 +12,18 @@ return [
         'view' => [
             'cache' => slim_env('APP_DEBUG') ? false : (dirname(__DIR__) . '/storage/cache/twig/'),
             'path' => dirname(__DIR__) . '/resources/views/',
-        ], 
+        ],
+        'db' => [
+            'driver' => slim_env('DB_DRIVER'),
+            'host' => slim_env('DB_HOST'),
+            'port' => slim_env('DB_PORT'),
+            'database' => slim_env('DB_DATABASE'),
+            'username' => slim_env('DB_USERNAME'),
+            'password' => slim_env('DB_PASSWORD'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix'    => '',
+        ],
         'cli' => [
             'commands' => [
                 'order/queue'

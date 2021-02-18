@@ -25,4 +25,27 @@ return function (\Slim\App $app) {
         return $view;
         
     };
+
+    $container['db'] = function ($container) use ($settings) {
+        $capsule = new \Illuminate\Database\Capsule\Manager;
+
+        $capsule->addConnection([
+            'driver'        => $settings['db']['driver'],
+            'host'          => $settings['db']['host'],
+            'port'          => $settings['db']['port'],
+            'database'      => $settings['db']['database'],
+            'username'      => $settings['db']['username'],
+            'password'      => $settings['db']['password'],
+            'charset'       => $settings['db']['charset'],
+            'collation'     => $settings['db']['collation'],
+            'prefix'        => $settings['db']['prefix'],
+        ]);
+
+        return $capsule;
+    };
+
+    $db = $container->get('db');
+
+    $db->setAsGlobal();
+    $db->bootEloquent();
 };
